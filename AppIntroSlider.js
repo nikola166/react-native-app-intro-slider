@@ -159,8 +159,9 @@ export default class AppIntroSlider extends React.Component {
                     style={styleDot}
                     onPress={() => this.goToSlide(i)}
                     />
-                );
-          }})}
+                );}
+            }
+            )}
         </View>
         {btn}
         {skipBtn}
