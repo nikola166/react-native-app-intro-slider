@@ -148,20 +148,19 @@ export default class AppIntroSlider extends React.Component {
       <View style={[styles.paginationContainer, this.props.paginationStyle]}>
         <View style={styles.paginationDots}>
           {this.props.slides.length > 1 &&
-            this.props.slides.map((_, i) => (
-                this.props.renderDot ?
-                    this.props.renderDot(() => this.goToSlide(i), this.props, i) :
+            this.props.slides.map((_, i) => {
+              const styleDot = [styles.dot, this._rtlSafeIndex(i) === this.state.activeIndex ? this.props.activeDotStyle : this.props.dotStyle];
+              if(this.props.renderDot) {
+                return this.props.renderDot(() => this.goToSlide(i), styleDot, i)
+              } else {
+                    return (
                     <TouchableOpacity
-                        key={i}
-                        style={[
-                          styles.dot,
-                          this._rtlSafeIndex(i) === this.state.activeIndex
-                              ? this.props.activeDotStyle
-                              : this.props.dotStyle,
-                        ]}
-                        onPress={() => this.goToSlide(i)}
+                    key={i}
+                    style={styleDot}
+                    onPress={() => this.goToSlide(i)}
                     />
-            ))}
+                );
+          }})}
         </View>
         {btn}
         {skipBtn}
