@@ -7,7 +7,6 @@ import {
   Text,
   TouchableOpacity,
   Platform,
-  StatusBar,
   I18nManager,
 } from 'react-native';
 import DefaultSlide from './DefaultSlide';
@@ -150,16 +149,18 @@ export default class AppIntroSlider extends React.Component {
         <View style={styles.paginationDots}>
           {this.props.slides.length > 1 &&
             this.props.slides.map((_, i) => (
-              <TouchableOpacity
-                key={i}
-                style={[
-                  styles.dot,
-                  this._rtlSafeIndex(i) === this.state.activeIndex
-                    ? this.props.activeDotStyle
-                    : this.props.dotStyle,
-                ]}
-                onPress={() => this.goToSlide(i)}
-              />
+                this.props.renderDot ?
+                    this.props.renderDot(() => this.goToSlide(i), this.props, i) :
+                    <TouchableOpacity
+                        key={i}
+                        style={[
+                          styles.dot,
+                          this._rtlSafeIndex(i) === this.state.activeIndex
+                              ? this.props.activeDotStyle
+                              : this.props.dotStyle,
+                        ]}
+                        onPress={() => this.goToSlide(i)}
+                    />
             ))}
         </View>
         {btn}
