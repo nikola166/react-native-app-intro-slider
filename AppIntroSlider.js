@@ -152,7 +152,7 @@ export default class AppIntroSlider extends React.Component {
               const styleDot = [styles.dot, this._rtlSafeIndex(i) === this.state.activeIndex ? this.props.activeDotStyle : this.props.dotStyle];
               const isActive = this._rtlSafeIndex(i) === this.state.activeIndex;
               if(this.props.renderDot) {
-                return this.props.renderDot(() => this.goToSlide(i), styleDot, i, isActive)
+                return this.props.renderDot(() => this.goToSlide(i), i, isActive)
               } else {
                     return (
                     <TouchableOpacity
